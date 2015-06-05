@@ -11,9 +11,9 @@ Front End for OFF
 # Import Modules
 import logging
 import sys
-from Common import helpers
-from Common import orchestra 
-from Common import messages
+from Modules.Common import helpers
+from Modules.Common import orchestra 
+from Modules.Common import messages
 
 
 
