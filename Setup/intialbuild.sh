@@ -39,3 +39,5 @@ func_instal(){
 sudo pip install --upgrade requests 
 #Install SimpleKML into python
 python simplekml/setup.py
+python wigle/.setup.py
+build Googleearth

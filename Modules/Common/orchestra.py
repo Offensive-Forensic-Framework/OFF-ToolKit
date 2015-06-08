@@ -34,7 +34,6 @@ class Conductor:
             if name.endswith(".py") and ("__init__" not in name):
                 loaded_modules = imp.load_source(name.replace("/", ".").rstrip('.py'), name)
                 self.modules[name] = loaded_modules
-
         return self.modules
 
     def list_modules(self):
@@ -53,6 +52,14 @@ class Conductor:
             print "\t%s)\t%s" % (x, '{0: <24}'.format(name))
             x += 1
         print ""
+
+    def call_handler(self, name):
+        name = name.strip('use') 
+        name = name.lstrip()
+        m = self.modules[name]
+        m = m.ClassName()
+        m.startx()
+
 
     def main_menu(self, showMessage=True):
         cmd = ""
@@ -74,10 +81,9 @@ class Conductor:
                     showMessage=False
 
                 elif cmd.startswith("use"):
-
-                    if len(cmd.split()) == 1:
-                        messages.title()
-                        cmd = ""
+                    messages.title()
+                    self.call_handler(cmd)
+                    cmd = ""
 
                 elif cmd.startswith("list"):
 

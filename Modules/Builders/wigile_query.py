@@ -1,5 +1,6 @@
 from uuid import getnode
-#from Modules.Common import helpers
+from Modules.Common import *
+import sys
 import re
 import requests
 import json
@@ -22,6 +23,16 @@ class WigleAgent():
                                  "mac" : ["00:22:55:DF:C8:01", "Set MAC Address"]}    
 
     def get_lat_lng(self, mac_address=None):
+        #Start with Credintial check
+        try:
+            self.response = send_user_check()
+            response = self.check_cred_login()
+            if response == 'false':
+                print "[*] Unable to validate this user..."
+        except:
+            #Use this two let user know we had a true login..
+            print helpers.color('[*] WIGLE: This user was validated', bold=False)
+            pass
         if mac_address == None:
             mac_address = self.mac_address
         if '-' in mac_address:
@@ -57,13 +68,24 @@ class WigleAgent():
         response = self.agent.post(url='https://wigle.net/api/v1/jsonLocation', 
                        data={'netid': mac_address,
                              'Query2': 'Query'})
+        #Check for and handle JSON Errors, due to blank returns
+        try: 
+            return response.json()
+        except ValueError:  # includes simplejson.decoder.JSONDecodeError
+            print helpers.color('[*] WIGLE: Decoding JSON has failed', bold=False, warning=True)
+            print helpers.color('[!] Exiting...', bold=True, warning=True)
+            print 
+            sys.exit()
+    
+    def send_user_check(self):
+        response = self.agent.post()
         return response.json()
     
     def parse_response(self):
         lat = self.get_lat()
         lng = self.get_lng()
         bssid = self.get_ssid()
-        return lat, lng, bssid
+        return {'lat':lat,'lng':lng, 'bssid':bssid}
     
     def get_lat(self):
         resp_lat = self.query_response['result'][0]['locationData'][0]['latitude']
@@ -80,10 +102,7 @@ class WigleAgent():
     def check_query_limit(self):
         resp_message = self.query_response['message']
         return str(resp_message)
-
-
-if __name__ == "__main__":
-
-    wa = WigleAgent('offtest', '83128312')
-    final = str(wa.get_lat_lng('00:22:55:DF:C8:01'))
-    print "Our Cords are: " + final
+    #Check User loign creds
+    def check_cred_login(self):
+        resp_message = self.query_response['success']
+        return str(resp_message)
