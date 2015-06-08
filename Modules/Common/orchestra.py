@@ -56,9 +56,41 @@ class Conductor:
     def call_handler(self, name):
         name = name.strip('use') 
         name = name.lstrip()
+        self.module_menu(name)
         m = self.modules[name]
         m = m.ClassName()
         m.startx()
+
+    def module_menu(self, module):
+        self.module_info(module)
+        messages.helpmsg(self.modulescommands, showTitle=False)
+        
+
+    def module_info(self, module, showInfo=True):
+        if showInfo:
+            module = self.modules[module]
+            module = module.ClassName()
+            # extract the payload class name from the instantiated object, then chop off the load folder prefix
+            #modulename = "/".join(str(str(module.__class__)[str(module.__class__).find("ClassName"):]).split(".")[0].split("/")[1:])
+
+            print helpers.color(" Module information:\n")
+            print "\tName:\t\t" + module.name
+            print "\tLanguage:\t" + module.language
+            # format this all nice-like
+            print helpers.formatLong("Description:", module.description)
+        # if required options were specified, output them
+        if hasattr(module, 'required_options'):
+            print helpers.color("\n Required Options:\n")
+
+            print " Name\t\t\tCurrent Value\tDescription"
+            print " ----\t\t\t-------------\t-----------"
+
+            # sort the dictionary by key before we output, so it looks nice
+            for key in sorted(module.required_options.iterkeys()):
+                print " %s\t%s\t%s" % ('{0: <16}'.format(key), '{0: <8}'.format(module.required_options[key][0]), module.required_options[key][1])
+
+            print ""
+
 
 
     def main_menu(self, showMessage=True):

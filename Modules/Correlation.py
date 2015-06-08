@@ -5,15 +5,21 @@ from Builders import kml_builder
 class ClassName():
       #These are the options we will set
     def __init__(self):
-      print """
-      ---------------------------------------
-      Starting Your first dynamic module ever
-      ---------------------------------------
-      """
+      # required options
+      self.name = "Registry Network info corelation"
+      self.description = "AES Encrypted shellcode is decrypted at runtime with key in file, injected into memory, and executed"
+      self.language = "python"
+      self.extension = "py"
+      self.rating = "Excellent"    
+        
+      # options we require user interaction for- format is {Option : [Value, Description]]}
+      self.required_options = {"bssid" : ['00:22:55:DF:C8:01', "Set BSSID or MAC of AP"],
+                               "user" : ['offtest', "Set Username to WIGLE"],
+                               "pass" : ['83128312', "Set Password to WIGLE"]}
 
     def startx(self):
-      wa = wigile_query.WigleAgent('offtest', '83128312')
-      final = wa.get_lat_lng('00:22:55:DF:C8:01')
+      wa = wigile_query.WigleAgent(self.required_options["user"][0], self.required_options["pass"][0])
+      final = wa.get_lat_lng(self.required_options["bssid"][0])
       print final
       kml = kml_builder.kml()
       kml.build(final["lat"], final["lng"], final["bssid"]) #Pass SSID name of network

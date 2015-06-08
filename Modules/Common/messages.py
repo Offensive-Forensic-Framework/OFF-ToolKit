@@ -49,3 +49,16 @@ def help_msg(commands):
   for (cmd, desc) in commands:
     print "\t%s\t%s" % ('{0: <12}'.format(cmd), desc)
   print ""
+
+def helpmsg(commands, showTitle=True):
+  """
+  Print a help menu.
+  """
+  if showTitle:
+    title()
+  print " Available commands:\n"
+    # list commands in sorted order
+    #for cmd in sorted(commands.iterkeys(), reverse=True):
+  for (cmd, desc) in commands:
+    print "\t%s\t%s" % ('{0: <12}'.format(cmd), desc)
+  print ""
