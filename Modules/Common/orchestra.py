@@ -15,6 +15,7 @@ class Conductor:
         # empty until stuff loaded into them
         #stolen from Veil :)
         self.modules = {}
+        self.dmodules = {}
 
         self.commands = [   ("use","use a specific module"),
                             ("info","information on a specific module"),
@@ -26,14 +27,20 @@ class Conductor:
                                     ("generate","generate payload"),
                                     ("back","go to the main menu"),
                                     ("exit","exit Veil")]
+        #load up modules on instance
         self.load_modules()
 
         
     def load_modules(self):
+        #loop and assign key and name
+        x = 1
         for name in glob.glob('Modules/*.py'):
             if name.endswith(".py") and ("__init__" not in name):
                 loaded_modules = imp.load_source(name.replace("/", ".").rstrip('.py'), name)
                 self.modules[name] = loaded_modules
+                self.dmodules[x] = loaded_modules
+                x += 1
+        return self.dmodules
         return self.modules
 
     def list_modules(self):
@@ -55,8 +62,15 @@ class Conductor:
     #Handles all Use commands for each module: sets up the enviroment kinda
     def call_handler(self, name):
         name = name.strip('use') 
-        name = name.lstrip()
-        self.module_menu(name)
+        name = name.lstrip();
+        if name.isdigit() and 0 < int(name):
+            print "we have a numer"
+            print name
+            if name in self.dmodules.keys():
+                print "true"
+            print name
+        else:    
+            self.module_menu(name)
 
 
     def module_menu(self, module):
