@@ -5,7 +5,7 @@ from Builders import kml_builder
 class ClassName():
       #These are the options we will set
     def __init__(self):
-      # required options
+      # Descriptions that are required!!!
       self.name = "Registry Network info corelation"
       self.description = "WIGLE Query your known BSSID"
       self.language = "python"

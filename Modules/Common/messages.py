@@ -10,7 +10,7 @@ import orchestra
 version = "1.0.0"
 
 def title_screen():
-  print title()
+  title()
   offtext = """------------------------------------------------------------------------------
   ______   ________  ________ 
  /      \ /        |/        |
@@ -23,18 +23,19 @@ $$    $$/ $$ |      $$ |  / /  / /_/ / / / / / /  __/ |/ |/ / /_/ / /  / ,<
  $$$$$$/  $$/       $$/  /_/   \__,_/_/ /_/ /_/\___/|__/|__/\____/_/  /_/|_| 
 
   Welcome to the OFF Toolkit... This tool is a automated helper for 
-  advanced post explotation and targeting.
+  advanced post explotation and targeting. 
 ------------------------------------------------------------------------------"""
   print helpers.color(offtext, bold=False)
 
 def title():
   os.system('clear')
   #stolen from Veil :)
-  print " ============================================="
+  print " ============================================================"
   print " Curent Version: " + version 
-  print " ============================================="
-  print " Twitter: @Killswitch_gui | Website: fdsd"
-  print " ============================================="
+  print " ============================================================"
+  print " Twitter: @Killswitch_gui | Website: Offensive-Forensics.com"
+  print " ============================================================"
+
 
 def main_menu(loaded_modules):
   print " [*] Main Menu:\n"

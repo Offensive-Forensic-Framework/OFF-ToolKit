@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#build Googleearth
-
 # Current supported platforms: 
 #   Kali-Linux
 # Global Variables
@@ -45,16 +43,28 @@ func_install_requests(){
 # Install Git Dependencies
 func_git_deps(){
   echo ' [*] Installing Git Repo Dependencies'
-  echo ' [*] Installing SimpleKml python module'
-  cd ${tempdir}
-  git clone https://github.com/killswitch-GUI/simplekml.git
-  cd simplekml
-  sudo python setup.py install
-  cd ${tempdir}
-  sudo rm -rf simplekml
+  SIMPLE="$(sudo python -m simplekml)";
+  if [[ ${SIMPLE} == *"No module named simplekml"* ]]; then
+    echo ' [*] Installing SimpleKml python module'
+    cd ${tempdir}
+    git clone https://github.com/killswitch-GUI/simplekml.git
+    cd simplekml
+    sudo python setup.py install
+    cd ${tempdir}
+    sudo rm -rf simplekml
+  fi
+  echo ' [*] SimpleKml Already installed in python'
+    return 0
 }
 
 func_install_googleearth(){
+  #Check to see if google earth installed:
+  GOOGLE="$(sudo dpkg --list 'googleearth')";
+  if [[ ${GOOGLE} == *"Google Earth"* ]]; then
+    echo ' [*] Google earth already installed'
+    return 0
+  fi
+  #current way to build google earth
   echo ' [*] Google Earth for KML support'
   sudo apt-get install lsb-core
   sudo apt-get install googleearth-package
