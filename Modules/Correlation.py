@@ -7,7 +7,7 @@ class ClassName():
     def __init__(self):
       # required options
       self.name = "Registry Network info corelation"
-      self.description = "AES Encrypted shellcode is decrypted at runtime with key in file, injected into memory, and executed"
+      self.description = "WIGLE Query your known BSSID"
       self.language = "python"
       self.extension = "py"
       self.rating = "Excellent"    

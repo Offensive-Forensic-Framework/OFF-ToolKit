@@ -41,7 +41,7 @@ class Conductor:
         Prints out available payloads in a nicely formatted way.
         """
 
-        print helpers.color(" [*] Available payloads:\n")
+        print helpers.color(" [*] Available payloads:\n", blue=True)
         lastBase = None
         x = 1
         for name in self.modules:
@@ -52,35 +52,95 @@ class Conductor:
             print "\t%s)\t%s" % (x, '{0: <24}'.format(name))
             x += 1
         print ""
-
+    #Handles all Use commands for each module: sets up the enviroment kinda
     def call_handler(self, name):
         name = name.strip('use') 
         name = name.lstrip()
         self.module_menu(name)
-        m = self.modules[name]
-        m = m.ClassName()
-        m.startx()
+
 
     def module_menu(self, module):
+        #int the Class Object
+        module_name = module
+        module = self.modules[module]
+        module = module.ClassName()
         self.module_info(module)
         messages.helpmsg(self.modulescommands, showTitle=False)
-        
 
-    def module_info(self, module, showInfo=True):
+        #module menu
+        choice = ""
+        while choice == "":
+
+            while True:
+
+                choice = raw_input(" [>] Please enter a command: ").strip()
+
+                if choice != "":
+
+                    parts = choice.strip().split()
+                    # display help menu for the payload
+                    if parts[0] == "info":
+                        self.module_info(module)
+                        choice = ""
+                    if parts[0] == "help":
+                        messages.helpmsg(self.payloadCommands)
+                        choice = ""
+                    # head back to the main menu
+                    if parts[0] == "main" or parts[0] == "back":
+                        #finished = True
+                        return ""
+                        #self.MainMenu()
+                    if parts[0] == "exit":
+                        raise KeyboardInterrupt
+
+                    # Update Veil via git
+                    if parts[0] == "update":
+                        self.UpdateVeil()
+
+                    # set specific options
+                    if parts[0] == "set":
+
+                        # catch the case of no value being supplied
+                        if len(parts) == 1:
+                            print helpers.color(" [!] ERROR: no value supplied\n", warning=True)
+
+                        else:
+                            option = parts[1]
+                            value = "".join(parts[2:])
+                            try:
+                                module.required_options[option][0] = value
+                            except:
+                                print helpers.color(" [!] ERROR: Invalid value specified.\n", warning=True)
+                                cmd = ""
+                    # generate the payload
+                    if parts[0] == "generate":
+                        module.startx()
+
+
+                else:
+                    print helpers.color("\n [!] WARNING: not all required options filled\n", warning=True)
+    
+
+
+
+
+
+    def module_info(self, module, showInfo=True, showTitle=True):
+        if showTitle == True:
+            messages.title()
+
         if showInfo:
-            module = self.modules[module]
-            module = module.ClassName()
             # extract the payload class name from the instantiated object, then chop off the load folder prefix
             #modulename = "/".join(str(str(module.__class__)[str(module.__class__).find("ClassName"):]).split(".")[0].split("/")[1:])
 
-            print helpers.color(" Module information:\n")
+            print helpers.color(" Module information:\n", blue=True)
             print "\tName:\t\t" + module.name
             print "\tLanguage:\t" + module.language
             # format this all nice-like
             print helpers.formatLong("Description:", module.description)
         # if required options were specified, output them
         if hasattr(module, 'required_options'):
-            print helpers.color("\n Required Options:\n")
+            print helpers.color("\n Required Options:\n", blue=True)
 
             print " Name\t\t\tCurrent Value\tDescription"
             print " ----\t\t\t-------------\t-----------"
