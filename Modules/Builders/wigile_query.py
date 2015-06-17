@@ -50,6 +50,8 @@ class WigleAgent():
             response = self.parse_response()
         except IndexError:
             response = 'BSSID (MAC) location not known'
+            return response
+        print helpers.color('[*] WIGLE: Lat / Long and SSID have been retrived', bold=False)
         return response
         
     def agent(self, username, password):
@@ -74,7 +76,6 @@ class WigleAgent():
         except ValueError:  # includes simplejson.decoder.JSONDecodeError
             print helpers.color('[*] WIGLE: Decoding JSON has failed', bold=False, warning=True)
             print helpers.color('[!] Exiting...', bold=True, warning=True)
-            print 
             sys.exit()
     
     def send_user_check(self):
@@ -85,18 +86,20 @@ class WigleAgent():
         lat = self.get_lat()
         lng = self.get_lng()
         bssid = self.get_ssid()
-        return {'lat':lat,'lng':lng, 'bssid':bssid}
-    
+        string = str(self.query_response)
+        return {'lat':lat,'lng':lng, 'bssid':bssid, 'description':string}
+
     def get_lat(self):
-        resp_lat = self.query_response['result'][0]['locationData'][0]['latitude']
+        resp_lat = self.query_response['result'][0]['trilat']
         return float(resp_lat)
     
     def get_lng(self):
-        resp_lng = self.query_response['result'][0]['locationData'][0]['longitude']
+        resp_lng = self.query_response['result'][0]['trilong']
+
         return float(resp_lng)
     #Request the SSID name of the WIFI point
     def get_ssid(self):
-        resp_ssid = self.query_response['result'][0]['locationData'][0]['ssid']
+        resp_ssid = self.query_response['result'][0]['ssid']
         return str(resp_ssid)
     #Check to see if we reached our limit of 100 querys
     def check_query_limit(self):

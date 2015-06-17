@@ -1,0 +1,72 @@
+<group name="Network Info,">
+	<subkey name="8">
+		<id name="ServiceName">{640BD1C6-2E62-4E03-89BB-F01592D09402}</id>
+		<id name="Description">Intel(R) PRO/1000 MT Network Connection</id>
+	</subkey>
+	<subkey name="{640BD1C6-2E62-4E03-89BB-F01592D09402}">
+		<id name="UseZeroBroadcast">0</id>
+		<id name="EnableDeadGWDetect">1</id>
+		<id name="EnableDHCP">1</id>
+		<id name="NameServer"></id>
+		<id name="Domain"></id>
+		<id name="RegistrationEnabled">1</id>
+		<id name="RegisterAdapterName">0</id>
+		<id name="DhcpIPAddress">192.168.6.153</id>
+		<id name="DhcpSubnetMask">255.255.255.0</id>
+		<id name="DhcpServer">192.168.6.254</id>
+		<id name="Lease">1800</id>
+		<id name="LeaseObtainedTime">1434505241</id>
+		<id name="T1">1434506141</id>
+		<id name="T2">1434506816</id>
+		<id name="LeaseTerminatesTime">1434507041</id>
+		<id name="AddressType">0</id>
+		<id name="IsServerNapAware">0</id>
+		<id name="DhcpConnForceBroadcastFlag">0</id>
+		<id name="DhcpInterfaceOptions">2c:00:00:00:00:00:00:00:04:00:00:00:00:00:00:00:21:d7:80:55:c0:a8:06:02:06:00:00:00:00:00:00:00:04:00:00:00:00:00:00:00:21:d7:80:55:c0:a8:06:02:03:00:00:00:00:00:00:00:04:00:00:00:00:00:00:00:21:d7:80:55:c0:a8:06:02:0f:00:00:00:00:00:00:00:0b:00:00:00:00:00:00:00:21:d7:80:55:6c:6f:63:61:6c:64:6f:6d:61:69:6e:00:01:00:00:00:00:00:00:00:04:00:00:00:00:00:00:00:21:d7:80:55:ff:ff:ff:00:33:00:00:00:00:00:00:00:04:00:00:00:00:00:00:00:21:d7:80:55:00:00:07:08:36:00:00:00:00:00:00:00:04:00:00:00:00:00:00:00:21:d7:80:55:c0:a8:06:fe:35:00:00:00:00:00:00:00:01:00:00:00:00:00:00:00:21:d7:80:55:05:00:00:00</id>
+		<id name="DhcpGatewayHardware">c0:a8:06:02:06:00:00:00:00:50:56:ed:39:b5</id>
+		<id name="DhcpGatewayHardwareCount">1</id>
+		<id name="DhcpNameServer">192.168.6.2</id>
+		<id name="DhcpDefaultGateway">[u'192.168.6.2']</id>
+		<id name="DhcpDomain">localdomain</id>
+		<id name="DhcpSubnetMaskOpt">[u'255.255.255.0']</id>
+	</subkey>
+	<subkey name="{7C5A08B1-F29E-47FA-AA29-2093CE8503B8}">
+		<id name="UseZeroBroadcast">0</id>
+		<id name="EnableDeadGWDetect">1</id>
+		<id name="EnableDHCP">1</id>
+		<id name="NameServer"></id>
+		<id name="Domain"></id>
+		<id name="RegistrationEnabled">1</id>
+		<id name="RegisterAdapterName">0</id>
+		<id name="DhcpIPAddress">0.0.0.0</id>
+		<id name="DhcpSubnetMask">255.0.0.0</id>
+		<id name="DhcpServer">255.255.255.255</id>
+		<id name="Lease">0</id>
+		<id name="LeaseObtainedTime">0</id>
+		<id name="T1">0</id>
+		<id name="T2">0</id>
+		<id name="LeaseTerminatesTime">0</id>
+		<id name="AddressType">0</id>
+		<id name="IsServerNapAware">0</id>
+		<id name="DhcpConnForceBroadcastFlag">0</id>
+	</subkey>
+	<subkey name="{e29ac6c2-7037-11de-816d-806e6f6e6963}">
+	</subkey>
+	<subkey name="{E0DD7173-4A44-49DF-942A-3114A99EDCC9}">
+		<id name="ProfileName">Network</id>
+		<id name="Description">Network</id>
+		<id name="Managed">0</id>
+		<id name="Category">0</id>
+		<id name="DateCreated">df:07:06:00:06:00:0d:00:0a:00:2b:00:01:00:28:00</id>
+		<id name="NameType">6</id>
+		<id name="DateLastConnected">df:07:06:00:02:00:10:00:13:00:37:00:29:00:ed:00</id>
+	</subkey>
+	<subkey name="010103000F0000F0080000000F0000F0CB8BE18B4B6C9ABA223CB7F95A92351CED86BEF135AD6105220DF1BE1EDDB4C7">
+		<id name="ProfileGuid">{E0DD7173-4A44-49DF-942A-3114A99EDCC9}</id>
+		<id name="Description">Network</id>
+		<id name="Source">8</id>
+		<id name="DnsSuffix">localdomain</id>
+		<id name="FirstNetwork">Network</id>
+		<id name="DefaultGatewayMac">30:39:F2:45:30:C6</id>
+	</subkey>
+</group>
